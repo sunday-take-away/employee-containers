@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+
+  employee-service:
+    image: com.takeaway/take-away-employee-service:latest
+    ports:
+      - "8001:8001"
+    links:
+      - employee-db
+ 
+  employee-db:
+    image: mongo
+    ports:
+      - "27017:27017"
+

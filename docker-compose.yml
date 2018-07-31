@@ -9,11 +9,6 @@ services:
     links:
       - employee-db
  
-  employee-db:
-    image: mongo:4.0.0
-    ports:
-      - "27017:27017"
-
   message-broker:
     image: rabbitmq:3.7.7-management
     ports:
@@ -21,3 +16,15 @@ services:
     volumes:
       - ./message-broker/conf/rabbitmq.conf:/etc/rabbitmq.conf:ro
       - ./message-broker/conf/rabbitmq.definitions.json:/etc/rabbitmq/definitions.json:ro
+
+  timeseries-db:
+    image: influxdb:1.6.0
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./timeseries-database/conf/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+
+  employee-db:
+    image: mongo:4.0.0
+    ports:
+      - "27017:27017"

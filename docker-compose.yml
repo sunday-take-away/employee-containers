@@ -14,6 +14,13 @@ services:
     links:
       - talent-management-db
  
+  event-service:
+    image: com.takeaway/take-away-event-service:latest
+    ports:
+      - "8002:8080"
+    links:
+      - timeseries-db
+
   message-broker:
     image: rabbitmq:3.7.7-management
     ports:

@@ -35,8 +35,9 @@ docker-compose up
 ## Accessing services
 Using a web browser, you can access the following services:
 
-* `employee-service` - http://localhost:8001
-* `event-service` - http://localhost:8002
+* `employee-service` - http://localhost:8001 for full list of operations, see https://github.com/sunday-take-away/employee-service
+
+* `event-service` - http://localhost:8002 for full list of operations, see https://github.com/sunday-take-away/event-service
 
 Employee service has some rest methods which need authentication, use username and password from table below  
 (change localhost is domain is different).

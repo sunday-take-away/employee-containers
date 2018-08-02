@@ -6,5 +6,5 @@ sbt clean docker
 popd
 
 pushd ../event-service
-mvn clean docker:build
+mvn clean package docker:build
 popd

@@ -135,3 +135,8 @@ For the `event-service` java with spring boot was employed to receive events and
 This service is fairly simple to construct. For improved performance I would use Akka Streams or Spring Data Streams, 
 and have multiple instances of this service using kubernetes.
 
+### Continuous Integration
+Since this is all open source, simply employed travis to build services.
+This is to ensure code builds and is tested.
+See https://travis-ci.org/sunday-take-away for relevant build status.
+

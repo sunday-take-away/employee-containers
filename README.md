@@ -35,12 +35,26 @@ docker-compose up
 ## Accessing services
 Using a web browser, you can access the following services:
 
-* `employee-service` - http://localhost:8001 for full list of operations, see https://github.com/sunday-take-away/employee-service
+* `employee-service`
+  * http://localhost:8001 - for full list of operations, see https://github.com/sunday-take-away/employee-service
+  * http://localhost:8001/api-docs - Swagger documented API
 
-* `event-service` - http://localhost:8002 for full list of operations, see https://github.com/sunday-take-away/event-service
+* `event-service`
+  * http://localhost:8002 for full list of operations, see https://github.com/sunday-take-away/event-service
+  * http://localhost:8002/vs/api-docs - Swagger documented API
 
-Employee service has some rest methods which need authentication, use username and password from table below  
+Employee service has some rest methods which need authentication, use username and password from table below 
 (change localhost is domain is different).
+
+
+## Swagger UI
+
+Both services are documented via Swagger documentation.
+There is a separate Swagger UI container on this same network, see:
+
+http://localhost:8000
+
+Take the appropriate service Swagger URI and put this into the above Swagger UI, to view API calls.
 
 ## Monitoring messages
 Using a web browser, you can log into `RabbitMQ` admin UI.
@@ -122,7 +136,8 @@ Chosen for ability to query and store event data. I'm just treating all events a
 For improved performance I would choose Casandra.
 
 ### Micro-services architecture
-Microservices should be composable and should be treated as a 'black box'. 
+Micro-services should be composable and should be treated as a 'black box'. 
+Therefore any language could be used. 
 
 #### Employee Service
 For the `employee-service` scala with akka was employed to store and send events to message queue.

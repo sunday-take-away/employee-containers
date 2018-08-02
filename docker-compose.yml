@@ -1,6 +1,11 @@
 version: "3"
 
 services:
+  
+  swagger-ui:
+    image: swaggerapi/swagger-ui:v3.0.5
+    ports:
+      - "8000:8080"
 
   employee-service:
     image: com.takeaway/take-away-employee-service:latest
@@ -12,6 +17,7 @@ services:
   message-broker:
     image: rabbitmq:3.7.7-management
     ports:
+      - "5672:5672"      
       - "15672:15672"
     volumes:
       - ./message-broker/conf/rabbitmq.conf:/etc/rabbitmq.conf:ro
@@ -21,6 +27,8 @@ services:
     image: influxdb:1.6.0
     ports:
       - "8086:8086"
+    env_file:
+      - './database/event/conf/env.influxdb'    
     volumes:
       - ./database/event/conf/influxdb.conf:/etc/influxdb/influxdb.conf:ro
 

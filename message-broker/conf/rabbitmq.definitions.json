@@ -2,6 +2,12 @@
   "rabbit_version": "3.7.7",
   "users": [
     {
+      "name": "service",
+      "password_hash": "Yqth0DcWqZYddSXFDdPv9R7ovTbrC+0anPf71avk4/mpOdVi",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": ""
+    },
+    {
       "name": "admin",
       "password_hash": "qH+ZZvIgmC5oFTjmSst/gSI3b/CKPkRekAY4WEh2yZ5apxnd",
       "hashing_algorithm": "rabbit_password_hashing_sha256",
@@ -20,9 +26,38 @@
       "configure": ".*",
       "write": ".*",
       "read": ".*"
+    },
+    {
+      "user": "service",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
     }
   ],
-  "topic_permissions": [],
+  "topic_permissions": [
+    {
+      "user": "service",
+      "vhost": "/",
+      "exchange": "service-exchange.event",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "service",
+      "vhost": "/",
+      "exchange": "service-exchange.dead",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "service",
+      "vhost": "/",
+      "exchange": "service-exchange.retry",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
   "parameters": [],
   "global_parameters": [
     {
@@ -44,35 +79,17 @@
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
-      "arguments": {
-        "x-dead-letter-exchange": "service-exchange.event",
-        "x-message-ttl": 5000
-      }
+      "arguments": {}
     },
     {
       "name": "service-exchange.event",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
-      "arguments": {
-        "x-dead-letter-exchange": "service-exchange.dead",
-        "x-message-ttl": 5000
-      }
+      "arguments": {}
     }
   ],
   "exchanges": [
-    {
-      "name": "service-exchange.event",
-      "vhost": "/",
-      "type": "direct",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {
-        "alternate-exchange": "service-exchange.dead",
-        "x-match": "any"
-      }
-    },
     {
       "name": "service-exchange.retry",
       "vhost": "/",
@@ -90,19 +107,21 @@
       "auto_delete": false,
       "internal": false,
       "arguments": {}
+    },
+    {
+      "name": "service-exchange.event",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {
+        "alternate-exchange": "service-exchange.dead",
+        "x-match": "any"
+      }
     }
   ],
   "bindings": [
-    {
-      "source": "service-exchange",
-      "vhost": "/",
-      "destination": "service-exchange.event",
-      "destination_type": "queue",
-      "routing_key": "event",
-      "arguments": {
-        "routing_key": "event"
-      }
-    },
     {
       "source": "service-exchange.dead",
       "vhost": "/",

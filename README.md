@@ -51,11 +51,11 @@ Using a web browser, you can access the following services:
 
 * `employee-service`
   * http://localhost:8001 - for full list of operations, see https://github.com/sunday-take-away/employee-service
-  * http://localhost:8001/api-docs - Swagger documented API
+  * http://localhost:8001/api-docs/swagger.json - Swagger documented API
 
 * `event-service`
   * http://localhost:8002 for full list of operations, see https://github.com/sunday-take-away/event-service
-  * http://localhost:8002/vs/api-docs - Swagger documented API
+  * http://localhost:8002/v2/api-docs - Swagger documented API
 
 Employee service has some rest methods which need authentication, use username and password from table below 
 (change localhost is domain is different).

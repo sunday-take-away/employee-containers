@@ -32,6 +32,20 @@ cd /tmp/new-snack-services/employee-containers
 docker-compose up
 ```
 
+See `Accessing services` to understand which operations to perform.
+
+However it is advisable to perform the following:
+* open web browser to `employee-service`
+* open web browser to `event-service`
+* open web browser to `RabbitMQ`
+
+All browsers can be opened at the same time.
+Once an employee has been created. updated or deleted - messages should be seen in the RabbitMQ.
+For confirmation of which details have changed the `event-service` can be queried by type and id.
+The full list of changes in data should be seen in chronological order from the `event-service`. 
+
+For full measure, underlying databases can be accessed as well.
+
 ## Accessing services
 Using a web browser, you can access the following services:
 
@@ -75,6 +89,9 @@ Interface is for localhost, if this is run on cloud replace localhost with appro
 | admin         | TakeAnAdmin   | http://localhost:8083    | InfluxDB Admin UI                     |
 | service       | TakeASnack    | http://localhost:8086    | InfluxDB query                        |
 | admin         | HackASnack    | http://localhost:8001    | Employee Service rest authorization   |
+| -             | -             | localhost:27017          | MongoDB interface                     |
+
+MongoDB is not secured by any username or password.
 
 # Prerequisites
 You need the following to build and run software.
@@ -129,7 +146,9 @@ For improved performance I would choose Kafka.
 ### MongoDB 
 Chosen for simplicity to store employee data.
 For even greater performance one can distribute these databases and shard them accordingly, 
-this was not necessary for these services.
+this was not necessary for these services. 
+Also MongoDB database is not secured, this has intentionally been left like this.
+It should be secure for production environments.
 
 ### InfluxDB
 Chosen for ability to query and store event data. I'm just treating all events as time-series data.
@@ -146,10 +165,12 @@ For improved performance service can be clustered and distributed with kubernete
 Akka Http with own bootstrapping mechanics is used, I believe in fine grained traits and these could be lifted out 
 to create an Akka/Http boot core module in order to simplify future services.
 
-#### Employee Service
+#### Event Service
 For the `event-service` java with spring boot was employed to receive events and store these in time-series fashion.
 This service is fairly simple to construct. For improved performance I would use Akka Streams or Spring Data Streams, 
-and have multiple instances of this service using kubernetes.
+and have multiple instances of this service using kubernetes. 
+
+It is important to note that event service stores events regardless of entity.
 
 ### Continuous Integration
 Since this is all open source, simply employed travis to build services.

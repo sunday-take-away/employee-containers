@@ -35,9 +35,9 @@ docker-compose up
 See `Accessing services` to understand which operations to perform.
 
 However it is advisable to perform the following:
-* open web browser to `employee-service`
-* open web browser to `event-service`
-* open web browser to `RabbitMQ`
+* open web browser to `employee-service` - http://localhost:8001
+* open web browser to `event-service` - http://localhost:8002
+* open web browser to `RabbitMQ` - http://localhost:15672 
 
 All browsers can be opened at the same time.
 Once an employee has been created. updated or deleted - messages should be seen in the RabbitMQ.

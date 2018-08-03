@@ -3,9 +3,9 @@ version: "3"
 services:
   
   swagger-ui:
-    image: swaggerapi/swagger-ui:v3.0.5
+    image: swaggerapi/swagger-ui:v2.2.9
     ports:
-      - "8000:8080"
+            - "8000:8080"
 
   employee-service:
     image: com.takeaway/take-away-employee-service:latest

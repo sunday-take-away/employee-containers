@@ -34,6 +34,8 @@ docker-compose up
 
 See `Accessing services` to understand which operations to perform.
 
+Execute various curl requests, see `Accessing Services`. 
+
 However it is advisable to perform the following:
 * open web browser to `employee-service` - http://localhost:8001
 * open web browser to `event-service` - http://localhost:8002
